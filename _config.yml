@@ -9,7 +9,7 @@
 title: heipacker 三两地
 email: heipackermail@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-闲来无事， 找个地方吐吐槽， 看官见谅。
+闲来无事， 找个地方吐吐槽， 小弟学艺不精，看官见谅。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://heipacker.github.io/" # the base hostname & protocol for your site
 twitter_username: heipacker
