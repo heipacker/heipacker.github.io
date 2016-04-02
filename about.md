@@ -7,7 +7,7 @@ permalink: /about/
 heipacker, 2015年1月毕业， 现在在qunar基础架构部打杂ing。
 
 {% gist parkr/c08ee0f2726fd0e3909d %}
-{% gist gist:8bf0ce903343171e11f7b487092ef316 %}
+{% gist parkr/a6a96d04ec19836d788db660513bc557 %}
 
 
 
