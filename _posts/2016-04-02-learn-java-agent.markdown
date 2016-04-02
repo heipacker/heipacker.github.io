@@ -39,8 +39,9 @@ javaagent的入口premain或者agentmain， 类似正常java的正常入口main�
 例子:[https://github.com/heipacker/agentTest.git][agent-example]
 
 参考文献:
-  1.[http://www.infoq.com/cn/articles/javaagent-illustrated][javaagent-illustrated]
-
+1.[http://www.infoq.com/cn/articles/javaagent-illustrated][javaagent-illustrated]
+2.[http://nijiaben.iteye.com/blog/1846595][nijiaben.iteye]
 
 [javaagent-illustrated]: http://www.infoq.com/cn/articles/javaagent-illustrated
 [agent-example]: https://github.com/heipacker/agentTest.git
+[nijiaben.iteye]: http://nijiaben.iteye.com/blog/1846595
