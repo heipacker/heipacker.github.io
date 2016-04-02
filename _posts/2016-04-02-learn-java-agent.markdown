@@ -33,7 +33,8 @@ tag: 技术
 8.设置某些native方法的前缀，主要在查找native方法的时候做规则匹配;<br/>
 </li>
 </ul>
-这里第一第二条算主要作用，其他的重要性比较低， 因为要做其他的性价比比较低，这个主要涉及到jdk里的java.lang.instrument这个包， 还有jdk目录下面的tools.jar这个包；
+这里第一第二条算主要作用，其他的重要性比较低， 因为要做其他的性价比比较低;<br/>
+javaagent这个东西主要涉及到jdk里的java.lang.instrument这个包， 还有jdk目录下面的tools.jar这个包；
 
   agent从字面意思上来理解就是代理用户的一些行为，如果你需要在程序运行前对程序的代码做一些操作， 比如修改字节码，做一些性能检测等， 还可以在运行的时候attach到jdk进程中去， 获取一些程序运行情况， 比如堆的监控， gc的信息； 相信大家在日常的工作中一般出现问题都会去dump一下， 比如jstack的时候就会经常会看到Signal Dispatcher和 Attach Listener线程这连个线程。
 
