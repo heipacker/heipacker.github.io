@@ -6,16 +6,12 @@ date:   2016-04-02 13:25:58 +0800
 categories: jekyll update
 tag: 技术
 ---
-<ul>
-  {% for post in site.posts %}
-      <li>
-            <a href="{{ post.url }}">{{ post.title }}</a>
-	          {{ post.excerpt }}
-      </li>
-  {% endfor %}
-</ul>
   这两天看了下java的agent，这个东西功能看起来很高级，功能很多， 比如：<br/>
-1.可以在加载class文件之前做拦截，对字节码做修改;<br/>
+<ul>
+<li>
+  1.可以在加载class文件之前做拦截，对字节码做修改;<br/>
+</li>
+</ul>
 2.可以在运行期对已加载类的字节码做变更;<br/>
 3.获取所有已经加载过的类;<br/>
 4.获取所有已经初始化过的类（执行过clinit方法，是上面的一个子集）;<br/>
