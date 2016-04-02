@@ -24,7 +24,7 @@ tag: 技术
 5.获取某个对象的大小;<br/>
 </li>
 <li>
-6.将某个jar加入到bootstrap classpath里作为高优先级被bootstrapClassloader加载;<br/>a
+6.将某个jar加入到bootstrap classpath里作为高优先级被bootstrapClassloader加载;<br/>
 </li>
 <li>
 7.将某个jar加入到classpath里供AppClassloard去加载;<br/>
