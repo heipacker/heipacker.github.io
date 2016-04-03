@@ -6,6 +6,7 @@ date:   2016-04-02 13:25:58 +0800
 categories: jekyll update
 tag: 技术
 ---
+![有帮助的截图]({{ site.url }}/assets/img/weibo.jpg)
   这两天看了下java的agent，这个东西功能看起来很高级，功能很多， 比如：<br/>
 <ul>
 <li>
