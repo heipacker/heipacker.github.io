@@ -20,3 +20,5 @@ weibo_username:  heipackerxpp
 markdown: kramdown
 gems:
           - jekyll-gist
+# page settings
+paginate: 5
