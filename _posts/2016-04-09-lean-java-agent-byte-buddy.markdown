@@ -29,6 +29,18 @@ tag: 技术
 大家能看到， 在sayHello前面有一行logging， 这个就是在DelagateLogging类里面的logging方法， 
 这个方法会在HelloWorld类里面的sayHello方法前执行
 
+  byte buddy这个框架还有很多其他的使用例子， 具体大家看看byte buddy的官网吧, 例子很多，在看byte buddy的时候
+看到byte buddy里面对classLoader的处理， 突然就想到这个星期一个同事有一个场景， 就是现在我通过代码自动生成了一个
+类文件， 然后编译以后， 这个class文件怎么能够让system classLoader获取lanuch classLoader来加载到呢， 这个一般你是可以
+提供一个参数， 然后把这个.class文件生成到指定的文件目录， 比如tomcat里面的webapps/ROOT/WEB-INF/classes/目录下面， 这个
+方法没啥问题， 但是这个有点不方便嘛， 还要用户来提供这个目录， 这个不是把自己的实现困难的负担转嫁给用户吗（一位同事说的真理）
+, 确实这个负担转嫁给用户了，大功告成， 普天同庆， 可是有没有好一点的方法呢， 今天看到byte buddy的实现确实是有更加优美的方法，
+byte buddy用的方法是利用java agent来新增system classLoader/lanuch classLoader的搜索路径，代码如下:
+{% gist heipacker/ef641b43b52979f9c2c0320cc83a10d3 %}
+这里可以看到， 先是打包.class文件为jar包， 然后调用target注入这个jar包， 这个target的两个实现就是下面的哪两个类加载器(BOOTSTRAP/SYSTEM)
+其实内部就是让这两个类加载器， 可以多扫描这个jar， 其实就是相当于把这个jar放到classpath里面去了， 这个方法是不是更完美呢？ 到底是不是就要
+看这个的代价了。。。哈哈
+
 具体实例代码:[https://github.com/heipacker/agentTest.git][agent-example]
 
 参考文献:<br/>
