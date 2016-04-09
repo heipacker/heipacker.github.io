@@ -9,7 +9,7 @@ tags: 技术
 [https://github.com/naver/pinpoint][pinpoint-git]<br/>
 
 这个主要用来查看系统性能， 及服务的一些运行状态， 当前服务调用情况等（盗图一张）
- ![](({{ site.img_url }}/ss_server-map.png)
+ ![]({{ site.img_url }}/ss_server-map.png)
 1.现在有一个单击版的pinpoint， 在127.0.0.1机器上面， 
 
 2.启动步骤：
