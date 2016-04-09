@@ -22,3 +22,4 @@ gems:
           - jekyll-gist
 # page settings
 paginate: 5
+img_url: http://heipacker.github.io/assets/img
