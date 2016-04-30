@@ -1,50 +1,38 @@
 ---
 layout: post
-title:  "学习byte buddy 一个字节码修改框架"
+title:  "学习dubbo ExtensionLoader"
 author: heipacker
-date:   2016-04-09 22:25:58 +0800
+date:   2016-04-30 22:25:58 +0800
 categories: jekyll update
-tag: 技术
+tag: 技术,dubbo
 ---
-  接上一片java agent， 之前只实现了java agent attach到jvm里面去的部分， 但是
-  attach进去以后能做的并没有讲，
-  上一篇也说了这个java agent具体能做说明， 本篇就举一个例子， 拦截所有的方法
-  在每个方法执行时记录一下执行，就是一个执行记录；
+说到extensionLoader, 肯定需要先说一下jdk里面自带这一个类似的东西， [ServiceLoader][serviceLoader-html]， 它的作用就是用来获取扩展的类， 举个例子： 我需要做一个读取远程文本的工具， 这个开始我只需要读取远程数据库里面的文本， 这个时候我， 会写一个接口RemoteLoader：
+{% gist heipacker/8fd594ef7dbdbd86441f07fcabac717b  %}
+然后再实现一个读取远程数据库的文本的RemoteDbLoader:
+{% gist heipacker/5668b74a0b151ee8b0a52619c1794e9f  %}
+这样用的时候new RemoteDbLoader()就行了， 如果这个时候产品告诉你还有一个从hadoop里面都文本的需求， 你又再实现一个RemoteHadoopLoader， 然后new一个， 用过spring的人可能会在这些实现上加一个@Service注解， 然后通过applicationContext.getBean(), 就能很爽的拿到想拿到的类实现了， 但是如果我不用spring呢， 这可怎么办， 这个时候简单一点自己实现一个类似spring的东西就行了（哈， 好简单啊）， 其实你可以更简单一点直接用java.util.ServiceLoader来获取， 要知道你遇到的问题sun的兄弟们早就遇到了， javaee里面很多设计都这个样子， 但是用的兄弟都会发现这个java.util.ServiceLoader实现的还是有点粗糙的， 比如：
+1.它会把所有的都实例化了， 计算你没用到。。。
+{% gist heipacker/32c7af1530f47d85c935b35c254c2b60  %}
+你可以看到它返回的是一个ServiceLoader， 然后你要获取那个Class的话你还要用迭代器去拿， 所以没用到的都实例化了， 这个对那些实例化代价比较高的就有点难接受了。
+2.它没法根据一个实现来获取具体的实现实例，比如我在上例中要获取Db的实现是不行的。。。跪了。
+3.没法依赖注入， 比如A-->B, B-->C这种没法一次搞定。 需要自己编码在B实例化逻辑里加上依赖C。
+可能还有被的不好用的地方， 但从另外一个角度想， 这个是sun搞的， 他们是最底层的角度， 做到这个份已经差不多了， 你还要人家给你来点具体的场景，估计最后就你用了。。别人没法用。
 
-  这个主要就是在获取到Instrumentation这个实例以后， 通过Instrumentation.addTransformer方法， 如下：
-{% gist heipacker/81183110d73606f4a31b2b0fb8b37b79 %}
-然后我们的重点就是实现这个ClassFileTransformer接口了; 这里方法有很多， 你可以简单的实现一下， 如下：
-{% gist heipacker/dc219bff58e614a091cf0f989fe28d65 %}
-这个实现确实简单， 但是并没有什么很大作用； 所以要想一点其他的方法， 比如可以用asm, cglib, javaassist, jdk proxy
-这些东西来修改修改你的字节码什么的，公司里链路跟踪系统我看用的是asm来修改字节码， 这个需要去认真学习一下java的字节码了；
-这里就用另外一个框架byte buddy， 这个同事推荐， 而且官方给的性能测试也是相当不错[http://bytebuddy.net/#/tutorial][byte-buddy-benmark]
-这里就贴一下具体的实现， 如下：
-{% gist heipacker/1cf23e119f625924675f08a61c2d8ff3 %}
 
-{% gist heipacker/c71507842ac2507a87891b4784f88e0e %}
-然后就执行下面的，如下:
-{% gist heipacker/4439f791e202288c97f70e9c7b271bb3 %}
-查看输出了, 如下:
-{% gist heipacker/d27a450ffa3cbee5e5ed3246d281d3b2 %}
-大家能看到， 在sayHello前面有一行logging， 这个就是在DelagateLogging类里面的logging方法， 
-这个方法会在HelloWorld类里面的sayHello方法前执行
+----------
 
-  byte buddy这个框架还有很多其他的使用例子， 具体大家看看byte buddy的官网吧, 例子很多，在看byte buddy的时候
-看到byte buddy里面对classLoader的处理， 突然就想到这个星期一个同事有一个场景， 就是现在我通过代码自动生成了一个
-类文件， 然后编译以后， 这个class文件怎么能够让system classLoader获取lanuch classLoader来加载到呢， 这个一般你是可以
-提供一个参数， 然后把这个.class文件生成到指定的文件目录， 比如tomcat里面的webapps/ROOT/WEB-INF/classes/目录下面， 这个
-方法没啥问题， 但是这个有点不方便嘛， 还要用户来提供这个目录， 这个不是把自己的实现困难的负担转嫁给用户吗（一位同事说的真理）
-, 确实这个负担转嫁给用户了，大功告成， 普天同庆， 可是有没有好一点的方法呢， 今天看到byte buddy的实现确实是有更加优美的方法，
-byte buddy用的方法是利用java agent来新增system classLoader/lanuch classLoader的搜索路径，代码如下:
-{% gist heipacker/ef641b43b52979f9c2c0320cc83a10d3 %}
-这里可以看到， 先是打包.class文件为jar包， 然后调用target注入这个jar包， 这个target的两个实现就是下面的哪两个类加载器(BOOTSTRAP/SYSTEM)
-其实内部就是让这两个类加载器， 可以多扫描这个jar， 其实就是相当于把这个jar放到classpath里面去了， 这个方法是不是更完美呢？ 到底是不是就要
-看这个的代价了。。。哈哈
 
-具体实例代码:[https://github.com/heipacker/agentTest.git][agent-example]
+再来说ExtensionLoader这个dubbo里面的类似实现；这个的实现跟ServiceLoader类似， 除了可以从META-INF/services/读取还可以从多个目录读取扩展配置（META-INF/dubbo/, META-INF/dubbo/internal/）, 它会根据你的需要再去实例化， 不会想ServiceLoader那样都实例化， 基本上把上面提的一些缺点给解决了。
+{% gist heipacker/f6fbe78e05bc32f35866a7e08fe27801  %}
+上面是它最后获取到指定Class实现的逻辑， 可以看到它实例化以后还会做一些其他的事情injectExtension； 再来看这个方法
+{% gist heipacker/62144005fe550b70c236fb78417acf97  %}
+可以看到， 就是找set*方法， 把属性名作为name用getExtension去获取扩展， 递归实例化。
+做完injectExtension以后， 继续做wraper, 从cachedWrapperClasses里面获取所有wrapper包装当前instance； 然后返回。
+这里看一下如何找到wrapperClasses的， 看下面代码：
+{% gist heipacker/92c680b47746ae9801fdd4ba85bece31  %}
+通过构造函数是不是只有一个当前type来判断这个是不是一个wrapper类。
 
 参考文献:<br/>
-1.[http://www.infoq.com/cn/articles/Easily-Create-Java-Agents-with-ByteBuddy][byte-buddy-explain]
+1.[serviceLoader-html]:https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
 
-[byte-buddy-explain]: http://www.infoq.com/cn/articles/Easily-Create-Java-Agents-with-ByteBuddy
 [byte-buddy-benmark]: http://bytebuddy.net/#/tutorial
