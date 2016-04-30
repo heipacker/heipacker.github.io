@@ -26,7 +26,7 @@ tag: 技术,dubbo
 {% gist heipacker/f6fbe78e05bc32f35866a7e08fe27801  %}
 上面是它最后获取到指定Class实现的逻辑， 可以看到它实例化以后还会做一些其他的事情injectExtension； 再来看这个方法
 {% gist heipacker/62144005fe550b70c236fb78417acf97  %}
-可以看到， 就是找set*方法， 把属性名作为name用getExtension去获取扩展， 递归实例化。
+可以看到， 就是找set\*方法， 把属性名作为name用getExtension去获取扩展， 递归实例化。
 做完injectExtension以后， 继续做wraper, 从cachedWrapperClasses里面获取所有wrapper包装当前instance； 然后返回。
 这里看一下如何找到wrapperClasses的， 看下面代码：
 {% gist heipacker/92c680b47746ae9801fdd4ba85bece31  %}
