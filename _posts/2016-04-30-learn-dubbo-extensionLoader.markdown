@@ -6,10 +6,10 @@ date:   2016-04-30 12:25:58 +0800
 categories: jekyll update
 tag: 技术,dubbo
 ---
-这个的作用就是来加载用户指定的类实现， 你给一个接口， 然后它给你换行你需要的实现。
+&nbsp;&nbsp;这个的作用就是来加载用户指定的类实现， 你给一个接口， 然后它给你换行你需要的实现。
 
 
-说到extensionLoader, 肯定需要先说一下jdk里面自带这一个类似的东西， [ServiceLoader][serviceLoader-html]， 它的作用就是用来获取扩展的类， 举个例子： 我需要做一个读取远程文本的工具， 这个开始我只需要读取远程数据库里面的文本， 这个时候我， 会写一个接口RemoteLoader：
+&nbsp;&nbsp;&nbsp;&nbsp;说到extensionLoader, 肯定需要先说一下jdk里面自带这一个类似的东西， [ServiceLoader][serviceLoader-html]， 它的作用就是用来获取扩展的类， 举个例子： 我需要做一个读取远程文本的工具， 这个开始我只需要读取远程数据库里面的文本， 这个时候我， 会写一个接口RemoteLoader：
 {% gist heipacker/8fd594ef7dbdbd86441f07fcabac717b  %}
 然后再实现一个读取远程数据库的文本的RemoteDbLoader:
 {% gist heipacker/5668b74a0b151ee8b0a52619c1794e9f  %}
@@ -25,7 +25,7 @@ tag: 技术,dubbo
 ----------
 
 
-再来说ExtensionLoader这个dubbo里面的类似实现；这个的实现跟ServiceLoader类似， 除了可以从META-INF/services/读取还可以从多个目录读取扩展配置（META-INF/dubbo/, META-INF/dubbo/internal/）, 它会根据你的需要再去实例化， 不会想ServiceLoader那样都实例化， 基本上把上面提的一些缺点给解决了。
+&nbsp;&nbsp;&nbsp;&nbsp;再来说ExtensionLoader这个dubbo里面的类似实现；这个的实现跟ServiceLoader类似， 除了可以从META-INF/services/读取还可以从多个目录读取扩展配置（META-INF/dubbo/, META-INF/dubbo/internal/）, 它会根据你的需要再去实例化， 不会想ServiceLoader那样都实例化， 基本上把上面提的一些缺点给解决了。
 {% gist heipacker/f6fbe78e05bc32f35866a7e08fe27801  %}
 上面是它最后获取到指定Class实现的逻辑， 可以看到它实例化以后还会做一些其他的事情injectExtension； 再来看这个方法
 {% gist heipacker/62144005fe550b70c236fb78417acf97  %}
