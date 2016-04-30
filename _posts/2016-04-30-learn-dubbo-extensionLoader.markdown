@@ -6,7 +6,7 @@ date:   2016-04-30 12:25:58 +0800
 categories: jekyll update
 tag: 技术,dubbo
 ---
-    说到extensionLoader, 肯定需要先说一下jdk里面自带这一个类似的东西， [ServiceLoader][serviceLoader-html]， 它的作用就是用来获取扩展的类， 举个例子： 我需要做一个读取远程文本的工具， 这个开始我只需要读取远程数据库里面的文本， 这个时候我， 会写一个接口RemoteLoader：
+说到extensionLoader, 肯定需要先说一下jdk里面自带这一个类似的东西， [ServiceLoader][serviceLoader-html]， 它的作用就是用来获取扩展的类， 举个例子： 我需要做一个读取远程文本的工具， 这个开始我只需要读取远程数据库里面的文本， 这个时候我， 会写一个接口RemoteLoader：
 {% gist heipacker/8fd594ef7dbdbd86441f07fcabac717b  %}
 然后再实现一个读取远程数据库的文本的RemoteDbLoader:
 {% gist heipacker/5668b74a0b151ee8b0a52619c1794e9f  %}
