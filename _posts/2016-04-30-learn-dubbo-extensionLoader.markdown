@@ -2,7 +2,7 @@
 layout: post
 title:  "学习dubbo ExtensionLoader"
 author: heipacker
-date:   2016-04-30 12:25:58 +0800
+date:   2016-04-30 22:25:58 +0800
 categories: jekyll update
 tag: 技术,dubbo
 ---
@@ -29,14 +29,13 @@ tag: 技术,dubbo
 {% gist heipacker/f6fbe78e05bc32f35866a7e08fe27801  %}
 上面是它最后获取到指定Class实现的逻辑， 可以看到它实例化以后还会做一些其他的事情injectExtension； 再来看这个方法
 {% gist heipacker/62144005fe550b70c236fb78417acf97  %}
-可以看到， 就是找set\*方法， 把属性名作为name用getExtension去获取扩展， 递归实例化。
+可以看到， 就是找set*方法， 把属性名作为name用getExtension去获取扩展， 递归实例化。
 做完injectExtension以后， 继续做wraper, 从cachedWrapperClasses里面获取所有wrapper包装当前instance； 然后返回。
 这里看一下如何找到wrapperClasses的， 看下面代码：
 {% gist heipacker/92c680b47746ae9801fdd4ba85bece31  %}
 通过构造函数是不是只有一个当前type来判断这个是不是一个wrapper类。
 
 参考文献:<br/>
-1.https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
-2.http://dubbo.io/
+1.[serviceLoader-html]:https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
 
-[serviceLoader-html]:https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
+[byte-buddy-benmark]: http://bytebuddy.net/#/tutorial
