@@ -9,7 +9,7 @@ tag: 技术,dubbo
 &nbsp;&nbsp;&nbsp;&nbsp;本文记录本人学习Consumer的启动过程的笔记
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;我们从ReferenceBean的实例化讲起，这个ReferenceBean它实现了FactoryBean这个类，
+&nbsp;&nbsp;我们从ReferenceBean的实例化讲起，这个ReferenceBean它实现了FactoryBean这个类，
 大家应该知道，这个类是spring用来提供实例化bean的一个工厂, 比如我们需要实例化一个类时，它可能会有一些前置逻辑，可能你会有很多其他的方法，这里提供一个简单点的思路， 你可以实现一下FactoryBean这个类， 然后把这个实现类注入， 然后用@Resource注解就可以拿到了。<br/>
 重点讲解一下ReferenceBean的实例化， 看下代码吧:
 {% gist heipacker/83ff77e84f4f4e3c451ff740f7c13bd9 %}
