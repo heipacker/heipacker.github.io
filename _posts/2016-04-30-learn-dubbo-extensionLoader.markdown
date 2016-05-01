@@ -47,7 +47,8 @@ tag: 技术,dubbo
 {% gist heipacker/4cddcf739bc3de6369784bfddc03130d %}
 这个代码有点长(这帮同志就不能把方法写短一点吗。。。。)， 删了一些， 要看详细的自己看代码吧， 代虽然很长，但是就做了一下wrap， 然后调用JavaCompiler去编译这段代码，看下它生成的代码:
 {% gist heipacker/e1c1448122b77d513d267cba2c665696 %}
-到这里就很明白了， 就是里面再去调用ExtensionLoader.getExtension, 如果就是这样它应该交getWrapExtension了， 那它为啥交adaptiveExtension呢， 你仔细看， 它会用Invoker.getUrl()获取URL，然后拿到URL里面的protocol，默认用dubbo代替， 然后到扩展类里面拿指定的扩展类，这样它确实就是做了一个适配， 不同的protocol会拿到不一样的, 这里要注意dubbo里面切换不同的协议啊什么的都是通过在url里面指定， 然后这里动态适配的。果然它就adaptive哈。。。。 这个作用就是把实例化的代价再延迟到你真正去调用方法的时候，看到这里是不是会觉得dubbo的代码还是很精髓的。。。这个比java.util.ServiceLoader有进一步优化了一下延迟加载了。
+到这里就很明白了， 就是里面再去调用ExtensionLoader.getExtension, 如果就是这样它应该交getWrapExtension了， 那它为啥交adaptiveExtension呢， 你仔细看， 它会用Invoker.getUrl()获取URL，然后拿到URL里面的protocol，默认用dubbo代替， 然后到扩展类里面拿指定的扩展类，这样它确实就是做了一个适配， 不同的protocol会拿到不一样的, 这里要注意dubbo里面切换不同的协议啊什么的都是通过在url里面指定， 然后这里动态适配的。果然它就adaptive哈。。。。, 这里只是针对protocol的<br/>
+其他的类型扩展接口会生成别的代码，大家再具体debug看一下这个信息(比如Cluster扩展接口),这个作用就是把实例化的代价再延迟到你真正去调用方法的时候, 再做个适配，看到这里是不是会觉得dubbo的代码还是很精髓的。。。这个比java.util.ServiceLoader有进一步优化了一下延迟加载了。
 
 
 参考文献:<br/>
