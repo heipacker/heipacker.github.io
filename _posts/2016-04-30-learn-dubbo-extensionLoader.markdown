@@ -51,7 +51,7 @@ tag: 技术,dubbo
 
 
 参考文献:<br/>
-1.https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
-2.http://dubbo.io/
+1.[https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html]:https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
+2.[http://dubbo.io/]:http://dubbo.io/
 
 [serviceLoader-html]:https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
