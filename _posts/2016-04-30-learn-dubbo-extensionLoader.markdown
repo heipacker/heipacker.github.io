@@ -35,6 +35,20 @@ tag: 技术,dubbo
 这里看一下如何找到wrapperClasses的， 看下面代码：
 {% gist heipacker/92c680b47746ae9801fdd4ba85bece31  %}
 通过构造函数是不是只有一个当前type来判断这个是不是一个wrapper类。
+&nbsp;&nbsp;&nbsp;&nbsp;再看一下ExtensionLoader里面的getAdaptiveExtension方法， 这个方法是用获取，这个方法主要是用来做适配的，做适配<br/>
+大家都知道啥意思， 但是这个地方为啥要做适配呢， 开始一看不知道为啥， 我们看一下它干了什么
+{% gist heipacker/6361f72f0cf5c724511dbc1f70a80a7e %}
+再看一下createAdaptiveExtension方法干了什么
+{% gist heipacker/cc8c0a46e138fc9be5cb6bf0d03e08e5 %}
+可以看到， 这里会先调用getAdaptiveExtensionClass方法， 从字面意思就是获取自适应扩展的类Class， 然后调用newInstance，然后就是调用injectExtension<br/>
+这里injectExtension方法我们上面讲过， 主要就是这个获取自适应扩展类的Class方法， 它干了什么呢， 同样看一下代码：
+{% gist heipacker/0661db830334b9dfca31c9b53fdb86e3 %}
+可以看到最后调用到了createAdaptiveExtensionClassCode这个方法来生成AdaptiveExtensionClass， 再看下它干了什么
+{% gist heipacker/4cddcf739bc3de6369784bfddc03130d %}
+这个代码有点长(这帮同志就不能把方法写短一点吗。。。。)， 删了一些， 要看详细的自己看代码吧， 代虽然很长，但是就做了一下wrap， 然后调用JavaCompiler去编译这段代码，看下它生成的代码:
+{% gist heipacker/e1c1448122b77d513d267cba2c665696 %}
+到这里就很明白了， 就是里面再去调用ExtensionLoader.getExtension, 这个作用就是把实例化的代价再延迟到你真正去调用方法的时候，看到这里是不是会觉得dubbo的代码还是很精髓的。。。这个比java.util.ServiceLoader有进一步优化了一下延迟加载了。
+
 
 参考文献:<br/>
 1.https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html
