@@ -54,6 +54,8 @@ http://127.0.0.1:4242/<br/>
 
 参考文献:<br/>
 1.[http://opentsdb.net/docs/build/html/installation.html#compiling-from-source][opentsdb-install]
+2.[http://hbase.apache.org/book.html#quickstart_pseudo][hbase-install]
+3.[http://opentsdb.net/docs/build/html/user_guide/configuration.html][all-config]
 
 [opentsdb-install]:http://opentsdb.net/docs/build/html/installation.html#compiling-from-source
 [hbase-install]:http://hbase.apache.org/book.html#quickstart_pseudo
