@@ -2,7 +2,7 @@
 layout: post
 title:  "启动opentsdb"
 author: heipacker
-date:   2016-05-26 04:25:58 +0800
+date:   2016-05-26 00:45:58 +0800
 categories: jekyll update
 tag: 技术,opentsdb,hbase,hadoop
 ---
