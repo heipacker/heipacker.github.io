@@ -48,7 +48,7 @@ env COMPRESSION=NONE HBASE\_HOME=/home/heipacker/software/hbase-1.2.1 ./src/crea
 把表创建后就可以启动了。。。， 然后查看页面<br/>
 http://127.0.0.1:4242/<br/>
 然后就可以看图了， 如下：<br/>
-![image](https://github.com/heipacker/heipacker.github.io/blob/master/assets/img/opentsdb-ui-screenshot.png)
+![]({{ site.img_url }}/opentsdb-ui-screenshot.png)
 
 到这里就可以了， 下一篇讲讲怎么集成grafana图形界面。
 
