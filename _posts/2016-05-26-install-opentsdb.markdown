@@ -1,0 +1,60 @@
+---
+layout: post
+title:  "启动opentsdb"
+author: heipacker
+date:   2016-05-26 04:25:58 +0800
+categories: jekyll update
+tag: 技术,opentsdb,hbase,hadoop
+---
+&nbsp;&nbsp;&nbsp;&nbsp;本文记录本人学习安装opentsdb的笔记
+
+
+如果要安装opentsdb， 首先就的看看官网咯[安装文档][opentsdb-install],
+这里说了安装前提：
+1.A Linux system
+2.Java Runtime Environment 1.6 or later
+3.HBase 0.92 or later
+4.GnuPlot 4.2 or later
+没啥说的， 第三步参考[hbase安装][hbase-install]， 当然安装hbase也有前提， hadoop，zk啊这些， 文档都很齐全，参考一下就行了。
+
+然后就是安装了， 这里有几种方式可以安装，从tar.gz包来安装， 从deb来安装， 从source来安装
+这里主要讲一下从source安装
+
+到制定目录(/home/heipacker/IdeaProjects/)执行
+git clone https://github.com/OpenTSDB/opentsdb.git
+
+然后cd到opentsdb目录
+执行
+./build.sh
+
+这个你可能需要安装autoconf这个工具， 一般sudo apt-get install autoconf就行， 然后继续./build.sh
+
+安装完以后你会发现有一个build文件夹, cd进去, 会发现有一个tsdb文件
+然后执行./build/tsdb这个命令， 不过这个命令有一些参数需要填写， 可以用下面的命令
+./build/tsdb tsd
+当然执行了这个命令后， 你会发现并未卵
+会报没有其他的什么文件啥的， 这个你就的找到./src/opentsdb.conf这个文件了， 配置一下里面的参数:
+tsd.http.cachedir - Path to write temporary files to
+tsd.http.staticroot - Path to the static GUI files found in ./build/staticroot
+tsd.storage.hbase.zk\_quorum - If HBase and Zookeeper are not running on the same machine, specify the host and port here.
+主要配置这个就行了([完整的参数配置][all-config])
+
+tsdtmp=${TMPDIR-'/tmp'}/tsd    # For best performance, make sure
+mkdir -p "$tsdtmp"             # your temporary directory uses tmpfs
+./build/tsdb tsd --port=4242 --staticroot=build/staticroot --cachedir="$tsdtmp" --zkquorum=localhost:2181
+你也可以直接执行上面这个命令指定具体的参数， 然后你可能会发现/var/log/opentsdb文件夹不存在什么的， 这个就自己去创建一下
+启动以后就可以看看界面了， 不过好像不对哈， 还没有创建hbase表呢。。。。
+env COMPRESSION=NONE HBASE\_HOME=/home/heipacker/software/hbase-1.2.1 ./src/create\_table.sh
+把表创建后就可以启动了。。。， 然后查看页面
+http://127.0.0.1:4242/
+然后就可以看图了， 如下：
+![image](https://github.com/heipacker/heipacker.github.io/blob/master/assets/img/opentsdb-ui-screenshot.png)
+
+到这里就可以了， 下一篇讲讲怎么集成grafana图形界面。
+
+参考文献:<br/>
+1.[http://opentsdb.net/docs/build/html/installation.html#compiling-from-source][opentsdb-install]
+
+[opentsdb-install]:http://opentsdb.net/docs/build/html/installation.html#compiling-from-source
+[hbase-install]:http://hbase.apache.org/book.html#quickstart_pseudo
+[all-config]:http://opentsdb.net/docs/build/html/user_guide/configuration.html
