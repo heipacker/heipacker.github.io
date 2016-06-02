@@ -50,7 +50,7 @@ http://127.0.0.1:4242/<br/>
 然后就可以看图了， 如下：<br/>
 ![]({{ site.img_url }}/opentsdb-ui-screenshot.png)
 
-到这里就可以了， 下一篇讲讲怎么集成grafana图形界面。
+到这里就可以了，这里你如果想看图的话的安装一下tcollector来采集数据， 还得安装GnuPlot这个来展示图， 这里主要想集成grafana所以这个GnuPlot大家自己去装咯。。。 下一篇讲讲怎么集成grafana图形界面。
 
 参考文献:<br/>
 1.[http://opentsdb.net/docs/build/html/installation.html#compiling-from-source][opentsdb-install]
