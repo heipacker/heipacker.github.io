@@ -13,7 +13,7 @@ tag: 技术,opentsdb,hbase,hadoop,grafana
 不过看起来还是挺难看的嘛。。。这个时候就要找一个好看点的嘛， 毕竟好美之心人皆有之！！！
 这里就介绍一下如何用grafana这个很火的监控展示前端来展示opentsdb的监控数据
 
-## 安装grafana:</br>
+## 安装grafana:
 [http://docs.grafana.org/installation/debian/][grafana-download]到这里下载grafana的二进制安装包
 ![]({{ site.img_url }}/grafana_download.png)
 
