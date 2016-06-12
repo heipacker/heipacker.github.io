@@ -11,7 +11,8 @@ tag: 技术,opentsdb,hbase,hadoop,grafana
 
 前面一片学习了， 如何安装启动opentsdb， 这个主要是用来存储时间序列的监控数据的， 展示的话它也自带了一个<br/>
 不过看起来还是挺难看的嘛。。。这个时候就要找一个好看点的嘛， 毕竟好美之心人皆有之！！！
-这里就介绍一下如何用grafana这个很火的监控展示前端来展示opentsdb的监控数据，<br/>
+这里就介绍一下如何用grafana这个很火的监控展示前端来展示opentsdb的监控数据
+
 ## 安装grafana:</br>
 [http://docs.grafana.org/installation/debian/][grafana-download]到这里下载grafana的二进制安装包
 ![]({{ site.img_url }}/grafana_download.png)
@@ -28,6 +29,7 @@ tar -zxvf grafana*.tar.gz
 
 然后你会看到一个像这样的页面:
 ![]({{ site.img_url }}/grafana_home.png)
+
 ## 配置opentsdb:<br/>
 这个时候需要把opentsdb的监控数据在这里展示出来， 你需要配置一个opentsdb数据源, 按照下面两个图来就行了
 ![]({{ site.img_url }}/grafana_config_datasource.png)
@@ -57,5 +59,5 @@ tar -zxvf grafana*.tar.gz
 1.[http://opentsdb.net/docs/build/html/installation.html#compiling-from-source][opentsdb-install]
 2.[http://docs.grafana.org/installation/debian/][grafana-download]
 
-[opentsdb-install]:http://opentsdb.net/docs/build/html/installation.html#compiling-from-source
-[grafana-download]:[http://docs.grafana.org/installation/debian/]
+[opentsdb-install]:http://heipacker.github.io/jekyll/update/2016/05/25/install-opentsdb.html
+[grafana-download]:http://docs.grafana.org/installation/debian/
