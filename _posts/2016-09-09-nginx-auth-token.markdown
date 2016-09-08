@@ -19,7 +19,7 @@ tag: 技术,nginx,authToken,upload
 现在基本两个思路:<br/>
 ## 1.通过session来做认证 ##<br/>
   session的机制的话主要就是利用http的协议了, session基于cookies来实现，每次访问都把特定的cookie
-带上. 这种方式现在基本没有了，它的优缺点也都很明显．
+带上. 这种方式现在基本没有了，它的优缺点也都很明显．<br/>
 ## 2.一个是通过token来认证 ##<br/>
 优点：<br/>
 *   跨域。ajax设置"Authorization header" and "Bearer<br/>
@@ -40,7 +40,7 @@ tag: 技术,nginx,authToken,upload
 token的认证思路:<br/><br/>
   客户端请求nginx对外的接口, 然后nginx-auth-request-module模块, 将token设置到header里面,<br/>
 然后auth接口对这个token进行验证, 成功返回200, 失败返回401, 如果返回200则跳转到用户请求的接口, <br/>
-如果返回401则，直接返回给用户显示为认证成功.
+如果返回401则，直接返回给用户显示为认证成功.<br/>
 
 token结构:<br/>
   accessKey:sigin:params<br/>
@@ -51,7 +51,7 @@ token结构:<br/>
 
 服务端处理：<br/>
   服务端通过解析token, 获取accessKey获取用户的secretKey, 然后使用相同规则对token里的params进行
-签名，然后跟客户端传过来的sign比对, 判断用户是否认证通过．
+签名，然后跟客户端传过来的sign比对, 判断用户是否认证通过．<br/>
 
 # 三.nginx配置:<br/>
 
