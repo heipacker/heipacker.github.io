@@ -17,10 +17,10 @@ tag: 技术,nginx,authToken,upload
 4.客户端请求需要认证的网址。传统的方式是由浏览器自动发送cookie到服务器端，服务器端核对sessionid<br/>
 
 ## 现在基本两个思路:<br/>
-### 1.通过session来做认证 ##<br/>
+### 1.通过session来做认证<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session的机制的话主要就是利用http的协议了, session基于cookies来实现，每次访问都把特定的cookie
 带上. 这种方式现在基本没有了，它的优缺点也都很明显．<br/>
-### 2.一个是通过token来认证 ##<br/>
+### 2.一个是通过token来认证 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token的机制有很多介绍的文章,大家自己去搜下看看。
 优点：<br/>
 *   跨域。ajax设置"Authorization header" and "Bearer<br/>
