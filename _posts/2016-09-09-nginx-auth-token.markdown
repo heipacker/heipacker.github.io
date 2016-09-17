@@ -6,7 +6,7 @@ date:   2016-09-09 00:45:58 +0800
 categories: jekyll update
 tag: 技术,nginx,authToken,upload
 ---
-&nbsp;&nbsp;&nbsp;&nbsp;本文记录本人配置auth认证模块所学
+&nbsp;&nbsp;&nbsp;&nbsp;本文记录本人配置auth认证模块了解的知识点, 这里记录一下。
 
 # 一.前言
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这段时间工作很忙, 由于工作需要, 我们项目涉及到文件的上传下载, 类似七牛云, 这个就需要一个对接口的
@@ -35,7 +35,7 @@ tag: 技术,nginx,authToken,upload
 *   对于reftful 客户端， 将其设置成GET或POST参数即可<br/>
 *   对于传统web; 可存储在cookie里由浏览器自动传送，会有跨域问题<br/>
 *   或者存储在localsotrage里, 或者url里，或者放在页面里。需要用js手动取出，拼接到url里。这会加大工作量。适用范围有限<br/>
-*   利用"Authorization header" and "Bearer<br/>
+*   利用"Authorization header" and "Bearer"<br/>
 
 # 二.authToken设计：<br/>
 token的认证思路:<br/><br/>
@@ -56,12 +56,11 @@ token结构:<br/>
 
 # 三.nginx安装:<br/>
 安装过程写了个脚本:<br/>
-![]({{ site.data_url }}/nginx_install.py)
+{% link assets/nginx_install.py %}
 
 # 四.nginx配置:<br/>
 下面是nginx的配置信息:<br/>
-![]({{ site.data_url }}/nginx.conf)<br/>
-
+{% link assets/nginx.conf %}
 
 参考文献:<br/>
 1.[http://www.jianshu.com/p/10fe9aebfed0][http://www.jianshu.com/p/10fe9aebfed0]
