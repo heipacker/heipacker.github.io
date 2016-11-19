@@ -11,7 +11,7 @@ tag: 技术,collectd
 # 简介:
 &nbsp;&nbsp;&nbsp;&nbsp;collectd是一个用来收集系统性能以及提供多种存储方式来存储不同性能值的守护进程。它会周期性统计系统的相关统计信息，并且可以利用这些信息发现当前系统性能的瓶颈和预测系统未来的load。</br>
 
-### 1、安装相关依赖</br>
+### 1、安装相关依赖
 ```
 #centos 6.x 32位
 rpm -ivh "http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
@@ -20,7 +20,7 @@ rpm -ivh "http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rp
 yum -y install libcurl libcurl-devel rrdtool rrdtool-devel perl-rrdtool rrdtool-prel libgcrypt-devel gcc make gcc-c++ liboping liboping-devel perl-CPAN net-snmp net-snmp-devel
 ```
 
-### 2、下载Collectd，并解压、编译和安装</br>
+### 2、下载Collectd，并解压、编译和安装
 ```
 wget http://collectd.org/files/collectd-5.4.1.tar.gz
 wget http://update.secon.me/collectd-5.4.1.tar.gz
@@ -30,7 +30,7 @@ cd collectd-5.4.1
 make && make install
 ```
 
-### 3、添加启动脚本和开机启动项</br>
+### 3、添加启动脚本和开机启动项
 ```
 #复制启动脚本
 cp contrib/redhat/init.d-collectd /etc/init.d/collectd
@@ -39,9 +39,7 @@ chmod +x /etc/init.d/collectd
 chkconfig --add collectd
 chkconfig collectd on
 ```
-### 4、更改配置文件/etc/collectd.conf,以采集CPU、内存、硬盘和网卡流量发送到graphite为例</br>
-vim /etc/collectd.conf
-
+### 4、更改配置文件/etc/collectd.conf,以采集CPU、内存、硬盘和网卡流量发送到graphite为例
 ```
 Hostname "BIGLog"
 
@@ -92,7 +90,7 @@ LoadPlugin write_graphite
 </Plugin>
 ```
 
-### 5、启动服务</br>
+### 5、启动服务
 ```
 service collectd start
 ```
