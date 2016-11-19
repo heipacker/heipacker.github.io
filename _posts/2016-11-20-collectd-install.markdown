@@ -9,7 +9,7 @@ tag: 技术,collectd
 &nbsp;&nbsp;&nbsp;&nbsp;这段时间项目也已经上线了，但是监控方面还是很欠缺，系统一直在裸奔，挂了都不知道，还在睡大觉，所以准备搭建一个监控系统，大概的思路是使用graphite来做后端存储, collectd来做基础数据收集，grafana来做前端监控图的展示, 最终要的就是报警了，准备使用seyren来报警，这篇文件先讲怎么安装collectd。
 
 # 简介:
-&nbsp;&nbsp;&nbsp;&nbsp;collectd是一个用来收集系统性能以及提供多种存储方式来存储不同性能值的守护进程。它会周期性统计系统的相关统计信息，并且可以利用这些信息发现当前系统性能的瓶颈和预测系统未来的load。</br>
+&nbsp;&nbsp;&nbsp;&nbsp;collectd是一个用来收集系统性能以及提供多种存储方式来存储不同性能值的守护进程。它会周期性统计系统的相关统计信息，并且可以利用这些信息发现当前系统性能的瓶颈和预测系统未来的load。
 
 ### 1、安装相关依赖
 ```
@@ -40,6 +40,7 @@ chkconfig --add collectd
 chkconfig collectd on
 ```
 ### 4、更改配置文件/etc/collectd.conf,以采集CPU、内存、硬盘和网卡流量发送到graphite为例
+
 ```
 Hostname "BIGLog"
 
