@@ -1,20 +1,15 @@
 ---
 layout: post
-title:  "nginx配置auth认证模块"
+title:  "collectd 安装"
 author: heipacker
-date:   2016-09-09 00:45:58 +0800
+date:   2016-11-20 00:45:58 +0800
 categories: jekyll update
-tag: 技术,nginx,authToken,upload
+tag: 技术,collectd
 ---
-&nbsp;&nbsp;&nbsp;&nbsp;本文记录本人配置auth认证模块了解的知识点, 这里记录一下。
+&nbsp;&nbsp;&nbsp;&nbsp;本文记录本人安装collectd的知识点, 这里记录一下。
 
 # 一.前言
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这段时间工作很忙, 由于工作需要, 我们项目涉及到文件的上传下载, 类似七牛云, 这个就需要一个对接口的
-认证机制, 对于web的认证, 用户认证的本质, 用户认证分为会话控制(authentication)和权限控制(authorization)。要实现会话控制，就需要一个身份认证的过程：<br/>
-1.客户端提供认证凭证。eg：username password<br/>
-2.服务器核对<br/>
-3.核对失败则返回失败信息。核对成功则返回成功标识，传统的方式是使用session，设置客户端cookie<br/>
-4.客户端请求需要认证的网址。传统的方式是由浏览器自动发送cookie到服务器端，服务器端核对sessionid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这段时间项目也已经上线了，　但是监控方面还是很欠缺，系统一直在裸奔，挂了都不知道，还在睡大觉，所以准备搭建一个监控系统，大概的思路是使用graphite来做后端存储, collectd来做基础数据收集，grafana来做前端监控图的展示, 最终要的就是报警了，准备使用seyren来报警，这篇文件先讲怎么安装collectd．
 
 ## 现在基本两个思路:<br/>
 ### 1.通过session来做认证<br/>
