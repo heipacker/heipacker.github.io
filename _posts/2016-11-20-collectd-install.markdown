@@ -10,6 +10,7 @@ tag: 技术,collectd
 
 # 简介:
 &nbsp;&nbsp;&nbsp;&nbsp;collectd是一个用来收集系统性能以及提供多种存储方式来存储不同性能值的守护进程。它会周期性统计系统的相关统计信息，并且可以利用这些信息发现当前系统性能的瓶颈和预测系统未来的load。</br>
+
 ### 1、安装相关依赖</br>
 ```
 #centos 6.x 32位
@@ -40,8 +41,9 @@ chkconfig collectd on
 ```
 ### 4、更改配置文件/etc/collectd.conf,以采集CPU、内存、硬盘和网卡流量发送到graphite为例</br>
 vim /etc/collectd.conf
-#编辑collectd.conf文件
-```Hostname "BIGLog"
+
+```
+Hostname "BIGLog"
 
 LoadPlugin cpu
 LoadPlugin aggregation
