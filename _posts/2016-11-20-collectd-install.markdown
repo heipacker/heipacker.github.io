@@ -39,6 +39,7 @@ chmod +x /etc/init.d/collectd
 chkconfig --add collectd
 chkconfig collectd on
 ```
+
 ### 4、更改配置文件/etc/collectd.conf,以采集CPU、内存、硬盘和网卡流量发送到graphite为例
 
 ```
