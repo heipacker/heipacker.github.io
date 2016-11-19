@@ -2,7 +2,7 @@
 layout: post
 title:  "collectd源码安装"
 author: heipacker
-date:   2016-11-20 00:45:58 +0800
+date:   2016-11-20 00:15:58 +0800
 categories: jekyll update
 tag: 技术,collectd
 ---
